@@ -12,10 +12,13 @@ import { PandanganPage } from './pages/PandanganPage';
 import { SecretPage } from './pages/SecretPage';
 import { BookLoader } from './components/BookLoader';
 import { Sparkles, Film, Gamepad2, Compass, ArrowRight } from 'lucide-react';
+import { useLanguage } from './context/LanguageContext';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Book Opening Loading State
@@ -275,6 +278,16 @@ export default function App() {
       ) : (
         <div ref={containerRef} className="relative bg-black text-white font-['Plus_Jakarta_Sans'] overflow-x-hidden selection:bg-white/30 selection:text-black min-h-screen">
       
+      {/* ================= FIXED TOP HEADER (HOME) ================= */}
+      <header className="fixed top-0 inset-x-0 z-40 px-4 md:px-8 py-4 pointer-events-none">
+        <div className="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
+          <div className="font-['Cinzel'] font-bold text-base md:text-lg tracking-widest text-white/90 drop-shadow-md">
+            {t('brandName')}
+          </div>
+          <LanguageSwitcher />
+        </div>
+      </header>
+
       {/* ================= FIXED BACKGROUND WRAPPER ================= */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         
@@ -306,28 +319,28 @@ export default function App() {
           <div className="max-w-4xl mx-auto flex flex-col items-center">
             
             <h4 className="animate-up font-['Plus_Jakarta_Sans'] tracking-[0.3em] uppercase text-sm md:text-base text-white/60 mb-6">
-              Tentang Diriku / A Journey of Self
+              {t('heroSubtitle')}
             </h4>
             
             <h1 className="animate-up font-['Cinzel'] text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-wide drop-shadow-2xl text-white/95">
-              Aditya Anugrah
+              {t('heroTitle')}
             </h1>
             
             <p className="animate-up font-['Playfair_Display'] italic text-2xl md:text-3xl lg:text-4xl text-white/90 mb-12 drop-shadow-lg">
-              "Bermimpi besar, mulai dari sekarang."
+              {t('heroQuote')}
             </p>
             
             <div className="animate-up max-w-2xl text-lg md:text-xl lg:text-2xl font-light text-white/80 leading-relaxed space-y-8 drop-shadow-md">
               <p>
-                Nama saya Aditya Anugrah (Ditnzy), seorang pembuat kode 17 tahun dari Sumedang. Saya memiliki ketertarikan yang dalam pada Teknologi dan Bisnis. 
+                {t('heroBio1')}
               </p>
               <p>
-                Melalui baris-baris kode, saya menerjemahkan imajinasi menjadi realitas—berfokus sebagai Front End Developer, namun selalu siap menjelajahi dunia Fullstack.
+                {t('heroBio2')}
               </p>
             </div>
             
             <div className="animate-up mt-24 flex flex-col items-center gap-6 opacity-70">
-              <span className="text-xs tracking-[0.4em] uppercase font-bold">Teruslah Melangkah</span>
+              <span className="text-xs tracking-[0.4em] uppercase font-bold">{t('keepMoving')}</span>
               <div className="scroll-prompt-line w-[2px] h-20 bg-gradient-to-b from-white to-transparent rounded-full" />
             </div>
 
@@ -341,19 +354,19 @@ export default function App() {
             {/* 1. Filosofi Content */}
             <div className="filosofi-content absolute inset-0 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto pointer-events-auto">
               <h2 className="font-['Cinzel'] text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wide drop-shadow-2xl text-white/95">
-                Fake It Until You Make It
+                {t('filosofiTitle')}
               </h2>
               
               <p className="font-['Playfair_Display'] italic text-2xl md:text-3xl lg:text-4xl text-white/80 mb-12 drop-shadow-lg">
-                "Meniru langkah yang belum sepenuhnya kita kuasai, sampai ia menjelma menjadi diri."
+                {t('filosofiQuote')}
               </p>
               
               <div className="max-w-2xl text-lg md:text-xl lg:text-2xl font-light text-white/80 leading-relaxed space-y-8 drop-shadow-md">
                 <p>
-                 Berani berjalan dengan keyakinan yang kita pinjam dari masa depan.
+                  {t('filosofiText1')}
                 </p>
                 <p>
-                 Bukan untuk menipu dunia, melainkan melatih mental agar tidak menyerah sebelum beneran bisa. Teruslah berlagak mampu, sampai yang semula hanya berupa peran, perlahan tumbuh alami dan mendarah daging di dalam jiwa.
+                  {t('filosofiText2')}
                 </p>
               </div>
             </div>
@@ -365,14 +378,14 @@ export default function App() {
                 {/* Teks di Kiri */}
                 <div className="flex-1 text-center md:text-left">
                   <h2 className="font-['Cinzel'] text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wide drop-shadow-2xl text-white/95">
-                    Waifu
+                    {t('waifuTitle')}
                   </h2>
                   <div className="text-lg md:text-xl lg:text-2xl font-light text-white/80 leading-relaxed space-y-6 drop-shadow-md">
                     <p>
-                      Saya juga mempunyai Waifu, saya gak gila hanya yaaa... gataulah :-
+                      {t('waifuText1')}
                     </p>
                     <p className="font-['Playfair_Display'] italic text-2xl md:text-3xl text-white/90">
-                      "Saya suka Karakter Kuronuma Sawako di anime Kimi ni Todoke"
+                      {t('waifuText2')}
                     </p>
                   </div>
                 </div>
@@ -399,13 +412,13 @@ export default function App() {
               </div>
 
               <h2 className="font-['Cinzel'] text-3xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-wide drop-shadow-2xl text-white/95">
-                Kenapa?
+                {t('sawakoWhy')}
               </h2>
 
               <div className="relative max-w-3xl mx-auto px-6 md:px-10 py-8 rounded-2xl bg-black/40 backdrop-blur-md border border-white/15 shadow-2xl">
                 <span className="absolute -top-4 -left-2 md:-left-4 text-5xl md:text-7xl text-pink-300/30 font-['Playfair_Display'] select-none">“</span>
                 <p className="font-['Playfair_Display'] italic text-lg md:text-2xl lg:text-[25px] text-white/95 leading-relaxed drop-shadow-xl relative z-10">
-                  Di mataku, Sawako adalah embun fajar yang paling bening rapuh dalam rasa malu dan kepolosan, namun menyimpan hangat yang sanggup meluruhkan dingin dunia. Barangkali benaknya kerap riuh oleh keraguan yang tak bertepi, tetapi jiwanya tak pernah lelah memercayai kebaikan. Ia merawat persahabatan seperti merawat sekuntum bunga langka: setia, tanpa pamrih, dan teramat tulus. Kesempurnaannya justru lahir dari kerapuhan yang paling murni itu.
+                  {t('sawakoPoem')}
                 </p>
                 <span className="absolute -bottom-6 -right-2 md:-right-4 text-5xl md:text-7xl text-pink-300/30 font-['Playfair_Display'] select-none">”</span>
               </div>
@@ -415,32 +428,32 @@ export default function App() {
             <div className="hobi-content absolute inset-0 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto opacity-0 pointer-events-none translate-y-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-200 text-xs tracking-[0.25em] uppercase font-medium mb-6 backdrop-blur-md">
                 <span>🎮</span>
-                <span>Waktu Luang & Eksplorasi</span>
+                <span>{t('hobbyTag')}</span>
               </div>
 
               <h2 className="font-['Cinzel'] text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-wide drop-shadow-2xl text-white/95">
-                Hobi
+                {t('hobbyTitle')}
               </h2>
 
               <div className="relative max-w-3xl mx-auto px-6 md:px-10 py-8 rounded-2xl bg-black/40 backdrop-blur-md border border-white/15 shadow-2xl mb-8">
                 <p className="text-lg md:text-2xl font-light text-white/90 leading-relaxed drop-shadow-md">
-                  Kalo lagi senggang, biasanya saya ngabisin waktu nonton anime, film, atau baca novel dan buku self-improvement. Selain itu, saya juga suka ngasah otak lewat game puzzle sama iseng bikin video kenangan ala retro 90-an.
+                  {t('hobbyText')}
                 </p>
               </div>
 
               {/* Visual badges for hobbies */}
               <div className="flex flex-wrap items-center justify-center gap-3 max-w-2xl">
                 <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs md:text-sm text-white/80 font-medium">
-                  🎬 Nonton Anime & Film
+                  {t('hobbyBadge1')}
                 </span>
                 <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs md:text-sm text-white/80 font-medium">
-                  📚 Buku Self-Improvement
+                  {t('hobbyBadge2')}
                 </span>
                 <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs md:text-sm text-white/80 font-medium">
-                  🧩 Game Puzzle
+                  {t('hobbyBadge3')}
                 </span>
                 <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs md:text-sm text-white/80 font-medium">
-                  📼 Video Kenangan Retro 90-an
+                  {t('hobbyBadge4')}
                 </span>
               </div>
             </div>
@@ -451,22 +464,22 @@ export default function App() {
               <div className="flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-xs uppercase tracking-widest shadow-2xl">
                 <div className="step-label-1 flex items-center gap-1.5 md:gap-2 text-white font-medium transition-all duration-300">
                   <span className="step-dot-1 w-2 h-2 rounded-full bg-white shadow-[0_0_8px_white]" />
-                  <span className="text-[10px] md:text-xs">01. Filosofi</span>
+                  <span className="text-[10px] md:text-xs">{t('stepFilosofi')}</span>
                 </div>
                 <span className="text-white/25">•</span>
                 <div className="step-label-2 flex items-center gap-1.5 md:gap-2 text-white/40 font-medium transition-all duration-300">
                   <span className="step-dot-2 w-2 h-2 rounded-full bg-white/30 transition-all duration-300" />
-                  <span className="text-[10px] md:text-xs">02. Waifu</span>
+                  <span className="text-[10px] md:text-xs">{t('stepWaifu')}</span>
                 </div>
                 <span className="text-white/25">•</span>
                 <div className="step-label-3 flex items-center gap-1.5 md:gap-2 text-white/40 font-medium transition-all duration-300">
                   <span className="step-dot-3 w-2 h-2 rounded-full bg-white/30 transition-all duration-300" />
-                  <span className="text-[10px] md:text-xs">03. Sawako</span>
+                  <span className="text-[10px] md:text-xs">{t('stepSawako')}</span>
                 </div>
                 <span className="text-white/25">•</span>
                 <div className="step-label-4 flex items-center gap-1.5 md:gap-2 text-white/40 font-medium transition-all duration-300">
                   <span className="step-dot-4 w-2 h-2 rounded-full bg-white/30 transition-all duration-300" />
-                  <span className="text-[10px] md:text-xs">04. Hobi</span>
+                  <span className="text-[10px] md:text-xs">{t('stepHobi')}</span>
                 </div>
               </div>
 
@@ -476,7 +489,7 @@ export default function App() {
               </div>
 
               <div className="text-[11px] tracking-[0.25em] text-white/50 uppercase flex items-center gap-1.5 font-light">
-                <span>Scroll ke bawah</span>
+                <span>{t('scrollDown')}</span>
                 <span className="animate-bounce">↓</span>
               </div>
             </div>
@@ -490,19 +503,19 @@ export default function App() {
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/90 text-xs tracking-[0.25em] uppercase font-medium mb-6 backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5 text-white/80" />
-              <span>Jelajahi Lebih Jauh</span>
+              <span>{t('exploreDeeper')}</span>
             </div>
 
             <h2 className="font-['Cinzel'] text-4xl sm:text-6xl md:text-7xl font-bold mb-6 tracking-wide drop-shadow-2xl text-white">
-              Selengkapnya Tentangku
+              {t('moreAboutMeTitle')}
             </h2>
 
             <p className="font-['Playfair_Display'] italic text-xl md:text-2xl text-white/80 max-w-2xl mx-auto mb-6 drop-shadow-md">
-              "Pintu masuk menuju dunia, cerita, dan sudut pandang yang membentuk siapa diriku hari ini."
+              {t('moreAboutMeQuote')}
             </p>
 
             <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto font-light">
-              Pilih salah satu kategori di bawah untuk membaca catatan lengkap, ulasan favorit, dan refleksi mendalam saya.
+              {t('moreAboutMeDesc')}
             </p>
           </div>
 
@@ -521,20 +534,20 @@ export default function App() {
                   <Sparkles className="w-7 h-7" />
                 </div>
                 <span className="text-xs font-mono uppercase tracking-widest text-pink-300/80 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">
-                  01 • Cerita
+                  {t('cardAnimeSub')}
                 </span>
               </div>
 
               <h3 className="font-['Cinzel'] text-3xl font-bold text-white mb-3 group-hover:text-pink-200 transition-colors">
-                Anime
+                {t('cardAnimeTitle')}
               </h3>
 
               <p className="text-sm md:text-base text-white/70 leading-relaxed font-light mb-8">
-                Eksplorasi dunia animasi penuh makna, dari kehangatan Kimi ni Todoke, ketenangan Call of the Night, hingga filosofi waktu di Sousou no Frieren.
+                {t('cardAnimeDesc')}
               </p>
 
               <div className="flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wider uppercase text-pink-300 group-hover:text-white transition-colors">
-                <span>Buka Halaman Anime</span>
+                <span>{t('cardAnimeCta')}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
               </div>
             </div>
@@ -551,20 +564,20 @@ export default function App() {
                   <Film className="w-7 h-7" />
                 </div>
                 <span className="text-xs font-mono uppercase tracking-widest text-amber-300/80 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
-                  02 • Sinema
+                  {t('cardFilmSub')}
                 </span>
               </div>
 
               <h3 className="font-['Cinzel'] text-3xl font-bold text-white mb-3 group-hover:text-amber-200 transition-colors">
-                Film
+                {t('cardFilmTitle')}
               </h3>
 
               <p className="text-sm md:text-base text-white/70 leading-relaxed font-light mb-8">
-                Menyelami mahakarya layar lebar, sinematografi memukau, keajaiban scoring musik, dan emosi mendalam dalam karya Nolan, Chazelle, dan lainnya.
+                {t('cardFilmDesc')}
               </p>
 
               <div className="flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wider uppercase text-amber-300 group-hover:text-white transition-colors">
-                <span>Buka Halaman Film</span>
+                <span>{t('cardFilmCta')}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
               </div>
             </div>
@@ -581,20 +594,20 @@ export default function App() {
                   <Gamepad2 className="w-7 h-7" />
                 </div>
                 <span className="text-xs font-mono uppercase tracking-widest text-cyan-300/80 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
-                  03 • Logika
+                  {t('cardGameSub')}
                 </span>
               </div>
 
               <h3 className="font-['Cinzel'] text-3xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors">
-                Game
+                {t('cardGameTitle')}
               </h3>
 
               <p className="text-sm md:text-base text-white/70 leading-relaxed font-light mb-8">
-                Asah logika lewat game puzzle pemecah masalah, sensasi nostalgia video retro 90-an, serta apresiasi seni world-building atmosferik.
+                {t('cardGameDesc')}
               </p>
 
               <div className="flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wider uppercase text-cyan-300 group-hover:text-white transition-colors">
-                <span>Buka Halaman Game</span>
+                <span>{t('cardGameCta')}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
               </div>
             </div>
@@ -611,20 +624,20 @@ export default function App() {
                   <Compass className="w-7 h-7" />
                 </div>
                 <span className="text-xs font-mono uppercase tracking-widest text-emerald-300/80 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                  04 • Prinsip
+                  {t('cardPandanganSub')}
                 </span>
               </div>
 
               <h3 className="font-['Cinzel'] text-3xl font-bold text-white mb-3 group-hover:text-emerald-200 transition-colors">
-                Pandangan
+                {t('cardPandanganTitle')}
               </h3>
 
               <p className="text-sm md:text-base text-white/70 leading-relaxed font-light mb-8">
-                Catatan kompas hidup: Wilson’s Law, ketulusan kemanusiaan, craftsmanship dalam kode, dan tekad untuk bermimpi besar dari sekarang.
+                {t('cardPandanganDesc')}
               </p>
 
               <div className="flex items-center gap-2 text-xs md:text-sm font-semibold tracking-wider uppercase text-emerald-300 group-hover:text-white transition-colors">
-                <span>Buka Halaman Pandangan</span>
+                <span>{t('cardPandanganCta')}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
               </div>
             </div>
@@ -635,12 +648,12 @@ export default function App() {
           <div className="mb-16 flex flex-col items-center justify-center text-center">
             <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-white/20 text-white/50 text-xs backdrop-blur-md transition-all duration-300">
               <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
-              <span>Psst... ada sebuah catatan rahasia yang tersimpan di sini?</span>
+              <span>{t('secretClue')}</span>
               <button
                 onClick={() => navigateTo('secret')}
                 className="text-rose-300 hover:text-white font-semibold underline underline-offset-4 decoration-rose-400/50 hover:decoration-white transition-colors cursor-pointer"
               >
-                Click Here!
+                {t('clickHere')}
               </button>
             </div>
           </div>
@@ -650,10 +663,10 @@ export default function App() {
             <div className="flex flex-col sm:flex-row items-center gap-3">
               <span className="font-['Cinzel'] font-bold text-white text-sm tracking-widest">ADITYA ANUGRAH</span>
               <span className="hidden sm:inline">•</span>
-              <span>Front End Developer & Digital Creator</span>
+              <span>{t('footerRole')}</span>
             </div>
             <p className="font-mono">
-              © {new Date().getFullYear()} Ditnzy. All rights reserved.
+              © {new Date().getFullYear()} Ditnzy. {t('footerRights')}
             </p>
           </footer>
 

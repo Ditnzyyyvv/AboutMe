@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Sparkles } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface BookLoaderProps {
   onComplete: () => void;
 }
 
 export const BookLoader: React.FC<BookLoaderProps> = ({ onComplete }) => {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<HTMLDivElement>(null);
   const coverRef = useRef<HTMLDivElement>(null);
@@ -176,34 +178,34 @@ export const BookLoader: React.FC<BookLoaderProps> = ({ onComplete }) => {
           <div className="relative z-10">
             <div className="flex items-center justify-between border-b border-[#2b2520]/15 pb-3 mb-6">
               <span className="font-['Cinzel'] tracking-[0.25em] text-[10px] text-[#2b2520]/60 uppercase">
-                Bab Pembuka
+                {t('bookChapter')}
               </span>
               <span className="font-serif italic text-xs text-[#2b2520]/50">
-                Hal. 01
+                {t('bookPageNum')}
               </span>
             </div>
 
             <h3 className="font-['Cinzel'] text-xl sm:text-2xl font-bold text-[#1a1512] mb-3 tracking-wide">
-              A Journey of Self
+              {t('bookTitle')}
             </h3>
 
             <p className="font-['Playfair_Display'] italic text-xs sm:text-sm text-[#3d332a] leading-relaxed mb-4">
-              "Setiap lembaran baru dimulai dari keberanian untuk membuka halamannya."
+              {t('bookQuote')}
             </p>
 
             <div className="space-y-2 text-[11px] sm:text-xs text-[#52473b] font-light leading-relaxed">
               <p>
-                Menjelajahi dunia kode, imajinasi karya, dan refleksi hidup seorang pembuat karya.
+                {t('bookDesc1')}
               </p>
               <div className="w-8 h-[1px] bg-[#2b2520]/20 my-3" />
               <p className="font-mono text-[10px] text-[#2b2520]/50">
-                Ditnzy • Portfolio & Reflections
+                {t('bookDesc2')}
               </p>
             </div>
           </div>
 
           <div className="relative z-10 pt-4 border-t border-[#2b2520]/15 flex items-center justify-between text-[10px] font-mono text-[#2b2520]/45">
-            <span>MEMASUKI DUNIA...</span>
+            <span>{t('bookEntering')}</span>
             <span className="animate-pulse">● ● ●</span>
           </div>
         </div>
@@ -219,7 +221,7 @@ export const BookLoader: React.FC<BookLoaderProps> = ({ onComplete }) => {
         >
           <div className="h-full flex flex-col justify-center items-center text-center opacity-60">
             <p className="font-['Playfair_Display'] italic text-xs text-[#2e261f]">
-              "Bermimpi besar, mulai dari sekarang."
+              {t('heroQuote')}
             </p>
           </div>
         </div>
@@ -258,7 +260,7 @@ export const BookLoader: React.FC<BookLoaderProps> = ({ onComplete }) => {
           <div className="relative z-10 text-center pt-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-[9px] sm:text-[10px] font-mono tracking-[0.3em] uppercase">
               <Sparkles className="w-2.5 h-2.5 text-amber-300" />
-              <span>CHRONICLES</span>
+              <span>{t('bookCoverTag')}</span>
             </div>
           </div>
 
@@ -298,7 +300,7 @@ export const BookLoader: React.FC<BookLoaderProps> = ({ onComplete }) => {
         className="relative z-10 mt-14 flex flex-col items-center text-center gap-2"
       >
         <span className="font-['Cinzel'] tracking-[0.3em] uppercase text-xs text-white/60">
-          Membuka Halaman Portofolio
+          {t('bookSubPrompt')}
         </span>
         <div className="w-32 h-[1px] bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
       </div>
@@ -309,7 +311,7 @@ export const BookLoader: React.FC<BookLoaderProps> = ({ onComplete }) => {
           onClick={handleSkip}
           className="absolute bottom-8 px-5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/25 text-white/50 hover:text-white text-[11px] font-mono tracking-widest uppercase transition-all duration-300 backdrop-blur-md cursor-pointer hover:scale-105"
         >
-          Lewati Intro →
+          {t('skipIntro')}
         </button>
       )}
 

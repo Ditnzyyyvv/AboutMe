@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PageNavbar } from '../components/PageNavbar';
 import { pandanganList } from '../data/pandanganData';
+import { useLanguage } from '../context/LanguageContext';
 
 interface PandanganPageProps {
   onNavigate: (page: string) => void;
 }
 
 export const PandanganPage: React.FC<PandanganPageProps> = ({ onNavigate }) => {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
@@ -151,7 +153,7 @@ export const PandanganPage: React.FC<PandanganPageProps> = ({ onNavigate }) => {
               {idx < pandanganList.length - 1 && (
                 <div className="mt-16 flex flex-col items-center gap-4 opacity-70">
                   <span className="text-[11px] tracking-[0.3em] uppercase font-bold text-white/80">
-                    Teruslah Melangkah
+                    {t('keepMoving')}
                   </span>
                   <div className="w-[2px] h-14 bg-gradient-to-b from-white to-transparent rounded-full" />
                 </div>
@@ -164,10 +166,10 @@ export const PandanganPage: React.FC<PandanganPageProps> = ({ onNavigate }) => {
         {/* BOTTOM NAVIGATION CTA */}
         <section className="min-h-[50vh] flex flex-col items-center justify-center px-6 py-20 text-center border-t border-white/10">
           <h3 className="font-['Cinzel'] text-3xl sm:text-5xl font-bold mb-4 text-white drop-shadow-md">
-            Jelajahi Kategori Lain
+            {t('exploreOther')}
           </h3>
           <p className="text-white/70 text-base sm:text-lg mb-8 max-w-md mx-auto drop-shadow-sm font-light">
-            Pilih kategori berikutnya untuk melanjutkan eksplorasi:
+            {t('chooseNext')}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -175,37 +177,37 @@ export const PandanganPage: React.FC<PandanganPageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('anime')}
               className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 backdrop-blur-md"
             >
-              ← Anime
+              ← {t('navAnime')}
             </button>
             <button
               onClick={() => onNavigate('film')}
               className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 backdrop-blur-md"
             >
-              Film & Series →
+              {t('btnFilm')}
             </button>
             <button
               onClick={() => onNavigate('game')}
               className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 backdrop-blur-md"
             >
-              Game →
+              {t('btnGame')}
             </button>
             <button
               onClick={() => onNavigate('home')}
               className="px-8 py-3.5 rounded-full bg-white text-black font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 shadow-xl"
             >
-              Kembali ke Beranda
+              {t('backToHome')}
             </button>
           </div>
 
           {/* Secret Page Clue */}
           <div className="mt-10">
             <span className="text-xs text-white/40">
-              Psst... ada sebuah catatan rahasia yang tersimpan?{' '}
+              {t('secretClue')}{' '}
               <button 
                 onClick={() => onNavigate('secret')} 
                 className="text-emerald-300 hover:text-white underline underline-offset-4 cursor-pointer font-semibold transition-colors"
               >
-                Click Here!
+                {t('clickHere')}
               </button>
             </span>
           </div>

@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { PageNavbar } from '../components/PageNavbar';
 import { animeList } from '../data/animeData';
 import { Star } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface AnimePageProps {
   onNavigate: (page: string) => void;
 }
 
 export const AnimePage: React.FC<AnimePageProps> = ({ onNavigate }) => {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
@@ -148,7 +150,7 @@ export const AnimePage: React.FC<AnimePageProps> = ({ onNavigate }) => {
               {/* Rating */}
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 border border-white/20 text-amber-300 font-semibold text-sm md:text-base mb-8 backdrop-blur-md drop-shadow-lg">
                 <Star className="w-4 h-4 fill-amber-300 text-amber-300" />
-                <span>Rating: {anime.rating}</span>
+                <span>{t('ratingLabel')}: {anime.rating}</span>
               </div>
 
               {/* Penjelasan Singkat */}
@@ -160,7 +162,7 @@ export const AnimePage: React.FC<AnimePageProps> = ({ onNavigate }) => {
               {idx < animeList.length - 1 && (
                 <div className="mt-16 flex flex-col items-center gap-4 opacity-70">
                   <span className="text-[11px] tracking-[0.3em] uppercase font-bold text-white/80">
-                    Teruslah Melangkah
+                    {t('keepMoving')}
                   </span>
                   <div className="w-[2px] h-14 bg-gradient-to-b from-white to-transparent rounded-full" />
                 </div>
@@ -173,10 +175,10 @@ export const AnimePage: React.FC<AnimePageProps> = ({ onNavigate }) => {
         {/* BOTTOM NAVIGATION CTA */}
         <section className="min-h-[50vh] flex flex-col items-center justify-center px-6 py-20 text-center border-t border-white/10">
           <h3 className="font-['Cinzel'] text-3xl sm:text-5xl font-bold mb-4 text-white drop-shadow-md">
-            Jelajahi Kategori Lain
+            {t('exploreOther')}
           </h3>
           <p className="text-white/70 text-base sm:text-lg mb-8 max-w-md mx-auto drop-shadow-sm font-light">
-            Pilih kategori berikutnya untuk melanjutkan eksplorasi:
+            {t('chooseNext')}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -184,37 +186,37 @@ export const AnimePage: React.FC<AnimePageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('film')}
               className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 backdrop-blur-md"
             >
-              Film & Series →
+              {t('btnFilm')}
             </button>
             <button
               onClick={() => onNavigate('game')}
               className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 backdrop-blur-md"
             >
-              Game →
+              {t('btnGame')}
             </button>
             <button
               onClick={() => onNavigate('pandangan')}
               className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 backdrop-blur-md"
             >
-              Pandangan →
+              {t('btnPandangan')}
             </button>
             <button
               onClick={() => onNavigate('home')}
               className="px-8 py-3.5 rounded-full bg-white text-black font-semibold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 shadow-xl"
             >
-              Kembali ke Beranda
+              {t('backToHome')}
             </button>
           </div>
 
           {/* Secret Page Clue */}
           <div className="mt-10">
             <span className="text-xs text-white/40">
-              Psst... ada sebuah catatan rahasia yang tersimpan?{' '}
+              {t('secretClue')}{' '}
               <button 
                 onClick={() => onNavigate('secret')} 
                 className="text-pink-300 hover:text-white underline underline-offset-4 cursor-pointer font-semibold transition-colors"
               >
-                Click Here!
+                {t('clickHere')}
               </button>
             </span>
           </div>
