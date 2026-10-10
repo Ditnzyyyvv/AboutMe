@@ -9,6 +9,7 @@ import { AnimePage } from './pages/AnimePage';
 import { FilmPage } from './pages/FilmPage';
 import { GamePage } from './pages/GamePage';
 import { PandanganPage } from './pages/PandanganPage';
+import { SecretPage } from './pages/SecretPage';
 import { Sparkles, Film, Gamepad2, Compass, ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -19,13 +20,13 @@ export default function App() {
   // Page Routing State with Hash Support
   const [currentPage, setCurrentPage] = useState<string>(() => {
     const hash = window.location.hash.replace('#/', '');
-    return ['anime', 'film', 'game', 'pandangan'].includes(hash) ? hash : 'home';
+    return ['anime', 'film', 'game', 'pandangan', 'secret'].includes(hash) ? hash : 'home';
   });
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#/', '');
-      if (['anime', 'film', 'game', 'pandangan'].includes(hash)) {
+      if (['anime', 'film', 'game', 'pandangan', 'secret'].includes(hash)) {
         setCurrentPage(hash);
         window.scrollTo(0, 0);
       } else {
@@ -265,6 +266,9 @@ export default function App() {
   }
   if (currentPage === 'pandangan') {
     return <PandanganPage onNavigate={navigateTo} />;
+  }
+  if (currentPage === 'secret') {
+    return <SecretPage onNavigate={navigateTo} />;
   }
 
   return (
@@ -624,6 +628,20 @@ export default function App() {
               </div>
             </div>
 
+          </div>
+
+          {/* Secret Page CTA with Clue */}
+          <div className="mb-16 flex flex-col items-center justify-center text-center">
+            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-white/20 text-white/50 text-xs backdrop-blur-md transition-all duration-300">
+              <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
+              <span>Psst... ada sebuah catatan rahasia yang tersimpan di sini?</span>
+              <button
+                onClick={() => navigateTo('secret')}
+                className="text-rose-300 hover:text-white font-semibold underline underline-offset-4 decoration-rose-400/50 hover:decoration-white transition-colors cursor-pointer"
+              >
+                Click Here!
+              </button>
+            </div>
           </div>
 
           {/* Elegant Footer */}

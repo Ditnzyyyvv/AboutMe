@@ -205,6 +205,19 @@ export const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
               Kembali ke Beranda
             </button>
           </div>
+
+          {/* Secret Page Clue */}
+          <div className="mt-10">
+            <span className="text-xs text-white/40">
+              Psst... ada sebuah catatan rahasia yang tersimpan?{' '}
+              <button 
+                onClick={() => onNavigate('secret')} 
+                className="text-cyan-300 hover:text-white underline underline-offset-4 cursor-pointer font-semibold transition-colors"
+              >
+                Click Here!
+              </button>
+            </span>
+          </div>
         </section>
 
       </main>
