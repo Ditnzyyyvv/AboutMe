@@ -1,0 +1,37 @@
+@import url('https://db.onlinewebfonts.com/c/440b53b1a1c65037f944ff19259d8014?family=Nokia+Cellphone+FC+Small');
+@import "tailwindcss";
+
+
+@theme {
+  --font-instrument: "Instrument Serif", serif;
+  --font-serif: "Instrument Serif", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-nokia: "Nokia Cellphone FC Small", monospace;
+  --font-kalam: "Kalam", cursive;
+  --font-hand: "Patrick Hand", cursive;
+  --color-paper: #fdfbf7;
+  --color-pencil: #2d2d2d;
+  --color-muted-paper: #e5e0d8;
+  --color-marker-red: #ff4d4d;
+  --color-pen-blue: #2d5da1;
+  --color-postit: #fff9c4;
+}
+
+@utility font-instrument {
+  font-family: "Instrument Serif", serif;
+}
+@utility font-nokia {
+  font-family: "Nokia Cellphone FC Small", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #F3F4ED;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
