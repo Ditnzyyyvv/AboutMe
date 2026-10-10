@@ -25,7 +25,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Let GSAP manage scrolling smoothly without native lag/pin desync */
 }
 
 body {
