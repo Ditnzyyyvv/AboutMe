@@ -10,6 +10,7 @@ import { FilmPage } from './pages/FilmPage';
 import { GamePage } from './pages/GamePage';
 import { PandanganPage } from './pages/PandanganPage';
 import { SecretPage } from './pages/SecretPage';
+import { BookLoader } from './components/BookLoader';
 import { Sparkles, Film, Gamepad2, Compass, ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -17,6 +18,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   
+  // Book Opening Loading State
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   // Page Routing State with Hash Support
   const [currentPage, setCurrentPage] = useState<string>(() => {
     const hash = window.location.hash.replace('#/', '');
@@ -255,24 +259,21 @@ export default function App() {
 
   }, { scope: containerRef });
 
-  if (currentPage === 'anime') {
-    return <AnimePage onNavigate={navigateTo} />;
-  }
-  if (currentPage === 'film') {
-    return <FilmPage onNavigate={navigateTo} />;
-  }
-  if (currentPage === 'game') {
-    return <GamePage onNavigate={navigateTo} />;
-  }
-  if (currentPage === 'pandangan') {
-    return <PandanganPage onNavigate={navigateTo} />;
-  }
-  if (currentPage === 'secret') {
-    return <SecretPage onNavigate={navigateTo} />;
-  }
-
   return (
-    <div ref={containerRef} className="relative bg-black text-white font-['Plus_Jakarta_Sans'] overflow-x-hidden selection:bg-white/30 selection:text-black min-h-screen">
+    <>
+      {isLoading && <BookLoader onComplete={() => setIsLoading(false)} />}
+      {currentPage === 'anime' ? (
+        <AnimePage onNavigate={navigateTo} />
+      ) : currentPage === 'film' ? (
+        <FilmPage onNavigate={navigateTo} />
+      ) : currentPage === 'game' ? (
+        <GamePage onNavigate={navigateTo} />
+      ) : currentPage === 'pandangan' ? (
+        <PandanganPage onNavigate={navigateTo} />
+      ) : currentPage === 'secret' ? (
+        <SecretPage onNavigate={navigateTo} />
+      ) : (
+        <div ref={containerRef} className="relative bg-black text-white font-['Plus_Jakarta_Sans'] overflow-x-hidden selection:bg-white/30 selection:text-black min-h-screen">
       
       {/* ================= FIXED BACKGROUND WRAPPER ================= */}
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -661,6 +662,8 @@ export default function App() {
       </main>
       {/* ====================================================== */}
       
-    </div>
+        </div>
+      )}
+    </>
   );
 }
